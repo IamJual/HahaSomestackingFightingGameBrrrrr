@@ -5,6 +5,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float speed = 3f;
+    public float jumpHeight = 5f;
+    public Rigidbody rigidbody;
+
+    void Start() {
+        rigidbody = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
@@ -14,6 +20,10 @@ public class Movement : MonoBehaviour
         Vector3 movement = new Vector3(x, 0, z);
 
         transform.Translate(movement * speed * Time.deltaTime);
+
+        if (Input.GetButtonDown("Jump")) {
+            rigidbody.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
+        }
 
     }
 }
